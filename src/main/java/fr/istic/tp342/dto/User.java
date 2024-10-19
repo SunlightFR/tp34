@@ -12,7 +12,7 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     private String username;
 
@@ -21,7 +21,7 @@ public class User implements Serializable {
     @OneToMany
     private List<Quiz> createdQuizzes;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
