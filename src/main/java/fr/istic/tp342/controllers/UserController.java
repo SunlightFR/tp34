@@ -5,6 +5,8 @@ import fr.istic.tp342.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -32,6 +34,11 @@ public class UserController {
     public String postUser(@RequestBody User user){
         User u  = userDao.save(user);
         return "Sauvegardé ! Id = "+u.getId();
+    }
+
+    @GetMapping("/user/search")
+    public List<User> searchByUsername(@RequestParam String username){
+        return userDao.searchByUsername(username);
     }
 
 }
