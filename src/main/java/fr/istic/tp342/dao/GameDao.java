@@ -1,10 +1,8 @@
 package fr.istic.tp342.dao;
 
-import fr.istic.tp342.dto.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import fr.istic.tp342.dto.Game;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface GameDao extends CrudRepository<User, Long> {
-    public User findUserById(long id);
+public interface GameDao extends JpaRepository<Game, Long> {
+    public Game findGameById(long id);
 }
