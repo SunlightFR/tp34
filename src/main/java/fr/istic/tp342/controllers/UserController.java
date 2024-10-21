@@ -3,6 +3,8 @@ package fr.istic.tp342.controllers;
 import fr.istic.tp342.dao.UserDao;
 import fr.istic.tp342.dto.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,21 +14,20 @@ import java.util.List;
 public class UserController {
     private final UserDao userDao;
 
-
     @GetMapping("/user")
-    public String getUser(@RequestParam(value = "id", required = false) Long id,
-                          @RequestParam(value = "username", required = false) String username) {
+    public ResponseEntity<String> getUser(@RequestParam(value = "id", required = false) Long id,
+                                         @RequestParam(value = "username", required = false) String username) {
         if (id != null) {
-            return "Hello " + userDao.findUserById(id).getUsername();
+            return new ResponseEntity<>("Bonjour " + userDao.findUserById(id).getUsername(), HttpStatus.OK);
         } else if (username != null) {
             User user = userDao.findUserByUsername(username);
             if (user == null) {
-                return "You don't exist!";
+                return new ResponseEntity<>("Aucun utilisateur avec cet id n'a été trouvé", HttpStatus.NOT_FOUND);
             } else {
-                return "Hello " + username + ", your id is " + user.getId();
+                return new ResponseEntity<>("Bonjour " + username + ", ton id est " + user.getId(), HttpStatus.OK);
             }
         } else {
-            return "Missing parameters!";
+            return new ResponseEntity<>("Il manque des paramètres !", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -40,5 +41,4 @@ public class UserController {
     public List<User> searchByUsername(@RequestParam String username){
         return userDao.searchByUsername(username);
     }
-
 }
