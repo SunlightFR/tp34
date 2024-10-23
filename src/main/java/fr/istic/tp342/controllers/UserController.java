@@ -18,11 +18,16 @@ public class UserController {
     public ResponseEntity<String> getUser(@RequestParam(value = "id", required = false) Long id,
                                          @RequestParam(value = "username", required = false) String username) {
         if (id != null) {
-            return new ResponseEntity<>("Bonjour " + userDao.findUserById(id).getUsername(), HttpStatus.OK);
+            User user = userDao.findUserById(id);
+            if (user == null) {
+                return new ResponseEntity<>("Aucun utilisateur avec cet id n'a été trouvé", HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>("Bonjour, ton nom est " + user.getUsername(), HttpStatus.OK);
+            }
         } else if (username != null) {
             User user = userDao.findUserByUsername(username);
             if (user == null) {
-                return new ResponseEntity<>("Aucun utilisateur avec cet id n'a été trouvé", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Aucun utilisateur avec ce nom n'a été trouvé", HttpStatus.NOT_FOUND);
             } else {
                 return new ResponseEntity<>("Bonjour " + username + ", ton id est " + user.getId(), HttpStatus.OK);
             }

@@ -64,4 +64,9 @@ public class QuizController {
         return new ResponseEntity<>("Ce jeu a été joué "+stats+" fois", HttpStatus.OK);
 
     }
+
+    @GetMapping("/quiz/{quizId}")
+    public Quiz getById(@PathVariable long quizId){
+        return quizDao.findById(quizId);
+    }
 }

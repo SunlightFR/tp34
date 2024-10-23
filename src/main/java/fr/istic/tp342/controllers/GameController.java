@@ -16,9 +16,8 @@ public class GameController {
     private final UserDao userDao;
 
     @GetMapping("/game/{id}")
-    public String doGet(@PathVariable long id){
-        Game game = gameDao.findGameById(id);
-        return game.toString();
+    public Game doGet(@PathVariable long id){
+        return gameDao.findGameById(id);
     }
 
     @PostMapping("/game")
@@ -33,6 +32,7 @@ public class GameController {
         if(game != null){
             if(userDao.existsById(userId)){
                 game.getPlayers().add(userDao.findUserById(userId));
+                gameDao.save(game);
                 return new ResponseEntity<>("L'utilisateur a bien rejoint le jeu !", HttpStatus.OK);
             }
             else{
