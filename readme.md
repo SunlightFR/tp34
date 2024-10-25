@@ -3,7 +3,7 @@
 
 ## Travail effectué
 
-J'ai adapté en Spring mon TP 1-2 en utilisant le même modèle relationnel et en ajoutant des endpoints de l'API.
+J'ai adapté en Spring mon TP 1-2 en utilisant le même modèle relationnel et en ajoutant des endpoints à l'API.
 
 ## Modèle relationnel
 
@@ -71,10 +71,6 @@ curl -X GET "http://localhost:8080/quiz/452"
 {"id":452,"creator":{"id":552,"username":"Machin","createdQuizzes":[]},"questions":[]}
 ```
 
-- `POST /quiz/{quizId}/addQuestion` : Ajoute une question à un quiz.
-```
-
-```
 - `GET /quiz/by/{userId}` : Renvoie les id des quiz créés par l'utilisateur d'id `userId`.
 ```
 curl -X GET "http://localhost:8080/quiz/by/552"
@@ -131,3 +127,6 @@ curl -X GET "http://localhost:8080/game/203"
 ## Problèmes et difficultés
 
 J'ai eu beaucoup de mal à setup le projet, j'y ai passé plusieurs soirées avant de trouver la réponse auprès de l'un de mes camarades (stackoverflow et autres gpt n'ayant été d'aucun secours).
+Je n'ai pas eu le temps de faire la partie keycloak. (Je n'arrive pas à installer docker sur mon pc).
+
+Je dois enfin vous signaler que je suis complètement dispensé d'assiduité dû à mon statut d'étudiant aidant. J'ai donc très peu de temps pour travailler (seulement quelques heures par jour et tard le soir), pas de binôme et pas d'accès aux salles de TP.
